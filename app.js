@@ -1,19 +1,21 @@
+/* --------------------------------------------------------------------------------
+object  ... main module
+-------------------------------------------------------------------------------- */
 const express = require('express');
 const dotenv = require('dotenv');
 //const path = require('path');
 const mongoose = require('mongoose');
 //const stuffRoutes = require('./routes/stuff');
-const userRoutes = require('./routes/user');
+const userRoutes = require('./js/routes/user');
 
 // variables d'environnement
 dotenv.config();
-const backPORT = process.env.BACK_PORT;
 const dbName = process.env.DB_NAME;
 const dbUser = process.env.DB_USER;
 const dbPwd = process.env.DB_PWD;
 
-// Connection database
-const connectDb = 'mongodb+srv://${dbUser}:${dbPwd}@cluster0.nbvdt.mongodb.net/${dbName}?retryWrites=true&w=majority';
+// Connection base de données
+const connectDb = `mongodb+srv://${dbUser}:${dbPwd}@cluster0.nbvdt.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 mongoose.connect(connectDb, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
@@ -27,6 +29,7 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(express.json());
 //app.use('/images', express.static(path.join(__dirname, 'images')));
 //app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);

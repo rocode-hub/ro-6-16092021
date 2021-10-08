@@ -1,5 +1,12 @@
+/* --------------------------------------------------------------------------------
+object  ... server module
+-------------------------------------------------------------------------------- */
 const http = require('http');
+const dotenv = require('dotenv');
 const app = require('./app');
+
+// variables d'environnement
+dotenv.config();
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
@@ -13,7 +20,7 @@ const normalizePort = val => {
   return false;
 };
 
-const port = normalizePort(process.env.PORT || backPORT);
+const port = normalizePort(process.env.PORT || process.env.BACK_PORT);
 app.set('port', port);
 
 const errorHandler = error => {
