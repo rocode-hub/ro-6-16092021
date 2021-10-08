@@ -2,6 +2,7 @@
 object  ... sauce model
 -------------------------------------------------------------------------------- */
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const sauceSchema = mongoose.Schema({
     userId: { type: String, required: true },
@@ -17,6 +18,6 @@ const sauceSchema = mongoose.Schema({
     usersDisliked: [{ userId: String }]
 });
 
-userSchema.plugin(uniqueValidator);
+sauceSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('Sauce', sauceSchema);

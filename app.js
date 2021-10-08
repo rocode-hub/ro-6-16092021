@@ -3,9 +3,9 @@ object  ... main module
 -------------------------------------------------------------------------------- */
 const express = require('express');
 const dotenv = require('dotenv');
-//const path = require('path');
+const path = require('path');
 const mongoose = require('mongoose');
-//const stuffRoutes = require('./routes/stuff');
+const sauceRoutes = require('./js/routes/sauce');
 const userRoutes = require('./js/routes/user');
 
 // variables d'environnement
@@ -30,8 +30,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-//app.use('/images', express.static(path.join(__dirname, 'images')));
-//app.use('/api/stuff', stuffRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 
 module.exports = app;
