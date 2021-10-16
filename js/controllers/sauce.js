@@ -38,13 +38,10 @@ exports.updateSauce = (req, res, next) => {
         ...JSON.parse(req.body.sauce),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
-    console.log(`${req.file}`);
     if ( req.file ) {
-        console.log( "if req.file" );
         Sauce.findOne({ _id: req.params.id })
             .then(sauce => {
                 const filename = sauce.imageUrl.split('/images/')[1];
-                console.log ({ filename });
                 fs.unlink(`images/${filename}`, (err => {
                     if (err) console.log(err);
                 }));
